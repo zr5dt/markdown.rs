@@ -195,7 +195,7 @@ mod test {
             parse_spans("this is ![an example](example.com) test"),
             vec![
                 Text("this is ".to_owned()),
-                Image("an example".to_owned(), "example.com".to_owned(), None),
+                Image("an example".to_owned(), "example.com".to_owned(), None, None),
                 Text(" test".to_owned())
             ]
         );
@@ -207,7 +207,7 @@ mod test {
             parse_spans("some text ![an image](image.com) _emphasis_ __strong__ `teh codez` [a link](example.com)  "),
             vec![
             Text("some text ".to_owned()),
-            Image("an image".to_owned(), "image.com".to_owned(), None),
+            Image("an image".to_owned(), "image.com".to_owned(), None, None),
             Text(" ".to_owned()),
             Emphasis(vec![Text("emphasis".to_owned())]),
             Text(" ".to_owned()),

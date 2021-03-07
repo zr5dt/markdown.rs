@@ -53,8 +53,10 @@ fn gen_span(s: Span) -> String {
         Link(a, b, None) => format!("[{}]({})", generate_from_spans(a), b),
         Link(a, b, Some(c)) => format!("[{}]({} \"{}\")", generate_from_spans(a), b, c),
         RefLink(_, _, raw) => raw,
-        Image(a, b, None) => format!("![{}]({})", a, b),
-        Image(a, b, Some(c)) => format!("![{}]({} \"{}\")", a, b, c),
+        Image(a, b, None, None) => format!("![{}]({})", a, b),
+        Image(a, b, Some(c), None) => format!("![{}]({} \"{}\")", a, b, c),
+        Image(a, b, None, Some(d)) => format!("![{}]({} ={})", a, b, d.as_text()),
+        Image(a, b, Some(c), Some(d)) => format!("![{}]({} \"{}\" ={})", a, b, c, d.as_text()),
         Emphasis(x) => format!("*{}*", generate_from_spans(x)),
         Strong(x) => format!("**{}**", generate_from_spans(x)),
     }

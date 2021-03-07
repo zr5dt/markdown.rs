@@ -18,7 +18,7 @@ fn slugify(elements: &[Span], no_spaces: bool) -> String {
         let next = match *el {
             Break => "".to_owned(),
             Literal(character) => character.to_string(),
-            Text(ref text) | Image(ref text, _, _) | Code(ref text) => text.trim().to_lowercase(),
+            Text(ref text) | Image(ref text, _, _, _) | Code(ref text) => text.trim().to_lowercase(),
             RefLink(ref content, _, _)
             | Link(ref content, _, _)
             | Strong(ref content)
@@ -126,16 +126,29 @@ fn format_spans(elements: &[Span], link_references: &LinkReferenceMap) -> String
                     raw.to_owned()
                 }
             }
-            Image(ref text, ref url, None) => format!(
+            Image(ref text, ref url, None, None) => format!(
                 "<img src=\"{}\" alt=\"{}\" />",
                 &escape(url, false),
                 &escape(text, true)
             ),
-            Image(ref text, ref url, Some(ref title)) => format!(
+            Image(ref text, ref url, Some(ref title), None) => format!(
                 "<img src=\"{}\" title=\"{}\" alt=\"{}\" />",
                 &escape(url, false),
                 &escape(title, true),
                 &escape(text, true)
+            ),
+            Image(ref text, ref url, None, Some(ref size)) => format!(
+                "<img src=\"{}\" alt=\"{}\" {}/>",
+                &escape(url, false),
+                &escape(text, true),
+                size.as_html(),
+            ),
+            Image(ref text, ref url, Some(ref title), Some(ref size)) => format!(
+                "<img src=\"{}\" title=\"{}\" alt=\"{}\" {}/>",
+                &escape(url, false),
+                &escape(title, true),
+                &escape(text, true),
+                size.as_html(),
             ),
             Emphasis(ref content) => format!("<em>{}</em>", format_spans(content, link_references)),
             Strong(ref content) => format!(

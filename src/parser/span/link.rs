@@ -177,7 +177,7 @@ mod test {
             parse_link("[![test](abc)](example.com) test [a link](example.com)"),
             Some((
                 Link(
-                    vec![Image("test".to_owned(), "abc".to_owned(), None)],
+                    vec![Image("test".to_owned(), "abc".to_owned(), None, None)],
                     "example.com".to_owned(),
                     None
                 ),

@@ -1,3 +1,4 @@
  ![bar](/foo.jpg)
 
+ ![bar](/foo.jpg "Title" =64x32)
 

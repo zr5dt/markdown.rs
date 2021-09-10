@@ -1,7 +1,7 @@
 use parser::Block;
 use parser::Block::HtmlBlock;
 
-const BLOCK_TAGS: [&str; 27] = [
+const BLOCK_TAGS: [&str; 28] = [
     "p",
     "div",
     "h1",
@@ -12,6 +12,7 @@ const BLOCK_TAGS: [&str; 27] = [
     "h6",
     "blockquote",
     "pre",
+    "style",
     "table",
     "dl",
     "ol",
